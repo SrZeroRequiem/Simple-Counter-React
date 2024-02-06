@@ -1,26 +1,32 @@
+import { element, number } from "prop-types";
 import React from "react";
-
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
+import Counter from "./counter";
 
 //create your first component
-const Home = () => {
+const counterSize = 6;
+const Home = (props) => {
+	let seconds = props.secondsProp / 1;
+	let divisor = Math.pow(10, counterSize - 1);
+	let counterArray = []
+	for (let index = 0; index < counterSize; index++) {
+		let element = Math.floor(seconds / divisor)
+		if (element >= 1) {
+			seconds = seconds - (divisor * element);
+			divisor = divisor / 10;
+		} else {
+			divisor = divisor / 10;
+		}
+		counterArray.push(element);
+
+	}
 	return (
-		<div className="text-center">
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
+		<div className="container-fluid vh-100 bg-dark d-flex align-items-center justify-content-center">
+			<Counter clockDigit={counterArray} />
 		</div>
 	);
 };
+Home.propTypes = {
+	secondsProp: number
+}
 
 export default Home;
