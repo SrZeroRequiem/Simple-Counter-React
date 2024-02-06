@@ -1,6 +1,6 @@
 import { element, number } from "prop-types";
 import React from "react";
-import Counter from "./counter";
+import Counter from "./utilities/counter";
 
 //create your first component
 const counterSize = 6;
